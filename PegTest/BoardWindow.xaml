@@ -16,6 +16,15 @@
             </Grid.Background>
             <!--Where ellipses are added to represent pegs-->
         </Grid>
-        <Button Content="Quit Game" HorizontalAlignment="Left" Margin="683,18,0,0" VerticalAlignment="Top" Height="32" Width="100" Background="#FFBDBDBD" Click="Quit_Button_Click"/>
+        <Button Content="Quit Game" HorizontalAlignment="Left" Margin="670,28,0,0" VerticalAlignment="Top" Height="32" Width="84" Background="#FFAB4A4A" Click="Quit_Button_Click" BorderBrush="#FF570101" Foreground="#FFFDFDFD" BorderThickness="2,2,2,2">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="7"/>
+                </Style>
+            </Button.Resources>
+            <Button.Effect>
+                <DropShadowEffect Opacity=".5"/>
+            </Button.Effect>
+        </Button>
     </Grid>
 </Window>
