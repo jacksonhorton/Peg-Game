@@ -1,0 +1,21 @@
+﻿<Window x:Class="PegTest.BoardWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PegTest"
+        mc:Ignorable="d"
+        Title="BoardWindow" Height="450" Width="800" ResizeMode="NoResize">
+    <Grid x:Name="Board_Window_Grid">
+        <Grid.Background>
+            <ImageBrush ImageSource="/blank-screen.png"/>
+        </Grid.Background>
+        <Grid x:Name="Game_Board_Grid" Margin="105,0,0,20" MouseLeftButtonDown="OnMouseLeftButtonDown" Height="386" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="565">
+            <Grid.Background>
+                <ImageBrush ImageSource="/board.png" Stretch="Uniform"/>
+            </Grid.Background>
+            <!--Where ellipses are added to represent pegs-->
+        </Grid>
+        <Button Content="Quit Game" HorizontalAlignment="Left" Margin="683,18,0,0" VerticalAlignment="Top" Height="32" Width="100" Background="#FFBDBDBD" Click="Quit_Button_Click"/>
+    </Grid>
+</Window>
