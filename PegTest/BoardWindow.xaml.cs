@@ -35,16 +35,19 @@ namespace PegTest
 
         private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            //Grid clickedGrid = (Grid)sender;
-            //Ellipse? ellipse = clickedGrid.Children[1] as Ellipse;
-            //if (ellipse != null )
-            //{
-            //    ellipse.Fill = Brushes.White;
-            //}
             if (e.OriginalSource is Ellipse)
             {
                 Ellipse el = (Ellipse)e.OriginalSource;
                 el.Fill = Brushes.Navy;
+            }
+        }
+
+        private void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (e.OriginalSource is Ellipse)
+            {
+                Ellipse el = (Ellipse)e.OriginalSource;
+                el.Fill = Brushes.Purple;
             }
         }
     }

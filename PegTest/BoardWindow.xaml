@@ -10,7 +10,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="/blank-screen.png"/>
         </Grid.Background>
-        <Grid x:Name="Game_Board_Grid" Margin="105,0,0,20" MouseLeftButtonDown="OnMouseLeftButtonDown" Height="386" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="565">
+        <Grid x:Name="Game_Board_Grid" Margin="105,0,0,20" MouseLeftButtonDown="OnMouseLeftButtonDown" MouseLeftButtonUp="OnMouseLeftButtonUp" Height="386" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="565">
             <Grid.Background>
                 <ImageBrush ImageSource="/board.png" Stretch="Uniform"/>
             </Grid.Background>
