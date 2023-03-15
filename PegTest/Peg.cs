@@ -9,10 +9,10 @@ namespace PegTest
 {
     public class Peg
     {
-        private PegPosition position;
+        private int position;
         private bool filled;
 
-        public Peg(PegPosition position, bool isFilled)
+        public Peg(int position, bool isFilled)
         {
             this.position = position;
             this.filled = isFilled;
@@ -22,7 +22,11 @@ namespace PegTest
         {
             return filled;
         }
-        public PegPosition getPosition()
+        public void setFilled(bool filled)
+        {
+            this.filled = filled;
+        }
+        public int getPosition()
         {
             return position;
         }

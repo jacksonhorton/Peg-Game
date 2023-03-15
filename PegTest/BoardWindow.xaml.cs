@@ -19,11 +19,14 @@ namespace PegTest
     /// </summary>
     public partial class BoardWindow : Window
     {
+        private Board board;
+        private int startPos;
         public BoardWindow()
         {
             InitializeComponent();
             // creates new board and passes this window so it can control pegs
-            Board board = new Board(5, 15, this);
+            board = new Board(5, 15, this);
+            startPos = -1;
         }
 
         private void Quit_Button_Click(object sender, RoutedEventArgs e)
@@ -37,8 +40,33 @@ namespace PegTest
         {
             if (e.OriginalSource is Ellipse)
             {
-                Ellipse el = (Ellipse)e.OriginalSource;
-                el.Fill = Brushes.Navy;
+                Ellipse ellipse = (Ellipse)e.OriginalSource;
+
+                // show possible moves if peg is clicked/held
+                if (ellipse.Name.Contains("Peg"))
+                {
+                    //int position = Int32.Parse(ellipse.Name.Substring(3, ellipse.Name.Length-1));
+                    int position = Int32.Parse(ellipse.Name.Substring(3));
+                    board.MoveCheck(position);
+
+                    startPos = position;
+                }
+                // try to make move if move ellipse is pressed
+                else if (ellipse.Name.Contains("Move"))
+                {
+                    if (startPos >=0)
+                    {
+                        int endPosition = Int32.Parse(ellipse.Name.Substring(4));
+
+                        // make move
+                        board.MovePeg(startPos, endPosition);
+
+                        startPos = -1;
+                    }
+
+
+                    
+                }
             }
         }
 
@@ -48,7 +76,11 @@ namespace PegTest
             {
                 Ellipse el = (Ellipse)e.OriginalSource;
                 el.Fill = Brushes.Purple;
+
             }
+
+            //// sets startPos to -1, like it is by default since it is no longer used
+            //startPos = -1;
         }
     }
 }
