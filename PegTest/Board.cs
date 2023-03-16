@@ -24,11 +24,13 @@ namespace PegTest
         private List<Ellipse> renderedHoles;
         private List<Ellipse> renderedMoves;
         private BoardWindow window;
+        private CBValidMove moveChecker;
 
         // Constructor
         public Board(int numOfRows, int numOfPegs, BoardWindow window)
         {
             this.window = window;
+            moveChecker = new CBValidMove();
 
             PegPoints = new Dictionary<int, (int,int)>();
             PegPoints.Add(0, (260, 282));
@@ -113,32 +115,33 @@ namespace PegTest
          */
         public bool MovePeg(int start, int final)
         {
-            var possibleMoves = GetValidMoves(start);
+            var possibleMoves = moveChecker.GetValidMoves(start, holes);
             var move = possibleMoves.Find(x => x.endPos == final);
 
-            if (GetHole(move.endPos).isFilled())
+
+
+            // TODO: move into move checker class
+            if (moveChecker.GetHole(move.endPos, holes).isFilled())
             {
                 // Can't move if the final hole already has a peg in it
                 Console.WriteLine("Peg in destination hole, can't move from " + move.startPos + " to " + move.endPos);
                 return false;
             }
-            else if (!GetHole(move.startPos).isFilled())
+            else if (!moveChecker.GetHole(move.startPos, holes).isFilled())
             {
                 // can't move start peg if there isn't a peg there
                 Console.WriteLine("No peg in start hole " + start);
                 return false;
             }
-            else if (!GetHole(move.midPos).isFilled())
+            else if (!moveChecker.GetHole(move.midPos, holes).isFilled())
             {
                 // not intermediate peg present -> illegal move
                 Console.WriteLine("No intermediate peg to jump over at " + move.endPos);
                 return false;
             }
 
-            // if all checks pass, move is valid; make move
-            Console.WriteLine("Moving " + move.startPos + " to " + move.endPos);
             
-            // TODO: Add appropriate logic to move the peg from the start position and move everything from hole object to hole object and not just update the gui
+            // TODO: make sure logic works
             foreach(Hole h in holes)
             {
                 if (h.GetPosition() == move.startPos)
@@ -227,7 +230,13 @@ namespace PegTest
             RemoveMoveEllipses();
 
             // calculate possible moves
-            _ = GetValidMoves(position);
+            List<(int startPos, int midPos, int endPos)> validMoves = moveChecker.GetValidMoves(position, holes);
+
+            foreach (var move in validMoves)
+            {
+                Ellipse e = RenderEllipse(move.endPos, "Move" + move.endPos, Brushes.Green, 0.5);
+                renderedMoves.Add(e);
+            }
 
         }
 
@@ -242,146 +251,7 @@ namespace PegTest
             renderedMoves.Clear();
         }
 
-        // checks if hole exists / is within bounds
-        private bool exists(int position)
-        {
-            if (position >= 0 && position < numOfPegs)
-                return true;
-            else
-                return false;
-        }
-
-
-        private bool isPossibleMove(int start, int mid, int end)
-        {
-            if (exists(start) && exists(mid) && exists(end))  // checks if middle/intermediate hole is filled
-            {
-                // checks if final hole is not filled
-                if (GetHole(start).isFilled() && GetHole(mid).isFilled() && !GetHole(end).isFilled())
-                {
-                    // checks for moves taking place accross different rows
-                    if (Math.Abs(getRow(end) - getRow(start)) == 2)
-                    {
-                        return true;
-                    }
-                    // checks for moves on same row
-                    if (getRow(end) == getRow(start) && Math.Abs(start - end) == 2)
-                    {
-                        return true;
-                    }
-
-                }
-            }
-
-            return false;
-        }
-
-        private List<(int startPos, int midPos, int endPos)> GetValidMoves(int startPosition)
-        {
-            // possibly use a map for better lookup
-            List<(int, int, int)> moveList = new List<(int startPos, int midPos, int endPos)> { };
-
-
-            int midPos;
-            int endPos;
-
-            // check upper left 
-            midPos = startPosition - getRow(startPosition) - 1;
-            endPos = midPos - getRow(midPos) - 1;
-            //Console.WriteLine(startPosition + " " + midPos + " " + endPos);
-            if (isPossibleMove(startPosition, midPos, endPos))
-            {
-                Console.WriteLine("UL");
-                moveList.Add((startPosition, midPos, endPos));
-                generateMoveEllipse(endPos, "UL");
-            }
-
-            // check upper right 
-            midPos = startPosition - getRow(startPosition);
-            endPos = midPos - getRow(midPos);
-            //Console.WriteLine(startPosition + " " + midPos + " " + endPos);
-            if (isPossibleMove(startPosition, midPos, endPos))
-            {
-                Console.WriteLine("UR");
-                moveList.Add((startPosition, midPos, endPos));
-                generateMoveEllipse(endPos, "UR");
-            }
-
-            // check lower right 
-            midPos = startPosition + getRow(startPosition) + 2;
-            endPos = midPos + getRow(midPos) + 2;
-            //Console.WriteLine(startPosition + " " + midPos + " " + endPos);
-            if (isPossibleMove(startPosition, midPos, endPos))
-            {
-                Console.WriteLine("LR");
-                moveList.Add((startPosition, midPos, endPos));
-                generateMoveEllipse(endPos, "LR");
-            }
-
-            // check lower left
-            midPos = startPosition + getRow(startPosition) + 1;
-            endPos = midPos + getRow(midPos) + 1;
-            //Console.WriteLine(startPosition + " " + midPos + " " + endPos);
-            if (isPossibleMove(startPosition, midPos, endPos))
-            {
-                Console.WriteLine("LL");
-                moveList.Add((startPosition, midPos, endPos));
-                generateMoveEllipse(endPos, "L");
-            }
-
-            // check left
-            midPos = startPosition - 1;
-            endPos = midPos - 1;
-            //Console.WriteLine(startPosition + " " + midPos + " " + endPos);
-            if (isPossibleMove(startPosition, midPos, endPos))
-            {
-                Console.WriteLine("L");
-                moveList.Add((startPosition, midPos, endPos));
-                generateMoveEllipse(endPos, "L");
-            }
-
-            // check right
-            midPos = startPosition + 1;
-            endPos = midPos + 1;
-            //Console.WriteLine(startPosition + " " + midPos + " " + endPos);
-            if (isPossibleMove(startPosition, midPos, endPos))
-            {
-                Console.WriteLine("R");
-                moveList.Add((startPosition, midPos, endPos));
-                generateMoveEllipse(endPos, "R");
-            }
-
-
-
-
-
-            return moveList;
-        }
-
-
-        private Hole GetHole(int position)
-        {
-            return holes[position];
-        }
-
-
-        private int getRow(int position)
-        {
-            // returns the row a peg at  given position should be found at (0-indexed)
-            int row = 0;
-            for (int i = 0; i < numOfRows; i++)
-            {
-                // magical formula to determine what row the pos it at
-                position = position - i - 1;
-                if (position < 0)
-                {
-                    row = i;
-                    return row;
-                }
-            }
-
-            return 0;
-        }
+        
 
     }
 }

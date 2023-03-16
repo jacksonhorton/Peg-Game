@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PegTest
 {
-    internal class CBMoveChecker
+    public abstract class ValidStrat
     {
     }
 }
