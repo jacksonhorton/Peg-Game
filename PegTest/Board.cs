@@ -19,7 +19,7 @@ namespace PegTest
     {
         private int numOfRows;
         private int numOfPegs;
-        public Dictionary<int, Point> PegPoints;
+        public Dictionary<int, (int, int)> PegPoints;
         private List<Hole> holes;
         private List<Ellipse> renderedHoles;
         private List<Ellipse> renderedMoves;
@@ -30,22 +30,22 @@ namespace PegTest
         {
             this.window = window;
 
-            PegPoints = new Dictionary<int, Point>();
-            PegPoints.Add(0, new Point(260, 282));
-            PegPoints.Add(1, new Point(218, 214));
-            PegPoints.Add(2, new Point(299, 214));
-            PegPoints.Add(3, new Point(179, 146));
-            PegPoints.Add(4, new Point(258, 146));
-            PegPoints.Add(5, new Point(339, 146));
-            PegPoints.Add(6, new Point(141,79));
-            PegPoints.Add(7, new Point(219, 79));
-            PegPoints.Add(8, new Point(299, 79));
-            PegPoints.Add(9, new Point(380, 79));
-            PegPoints.Add(10, new Point(100, 12));
-            PegPoints.Add(11, new Point(179, 12));
-            PegPoints.Add(12, new Point(258, 12));
-            PegPoints.Add(13, new Point(339, 12));
-            PegPoints.Add(14, new Point(420, 12));
+            PegPoints = new Dictionary<int, (int,int)>();
+            PegPoints.Add(0, (260, 282));
+            PegPoints.Add(1, (218, 214));
+            PegPoints.Add(2, (299, 214));
+            PegPoints.Add(3, (179, 146));
+            PegPoints.Add(4, (258, 146));
+            PegPoints.Add(5, (339, 146));
+            PegPoints.Add(6, (141,79));
+            PegPoints.Add(7, (219, 79));
+            PegPoints.Add(8, (299, 79));
+            PegPoints.Add(9, (380, 79));
+            PegPoints.Add(10, (100, 12));
+            PegPoints.Add(11, (179, 12));
+            PegPoints.Add(12, (258, 12));
+            PegPoints.Add(13, (339, 12));
+            PegPoints.Add(14, (420, 12));
 
 
             // initializes lists
@@ -60,36 +60,49 @@ namespace PegTest
             // generates ellipses and Hole objects for each peg
             for (int i=0; i<numOfPegs; i++)
             {
-                Ellipse temp = new Ellipse();
-                
-                // gets the left and bottom margin from the dictionary
-                // TODO: change the Point to a struct or something else to specifically store margin info
-                Point p = PegPoints[i];
+                string name = "Peg" + i;
+                Ellipse e;
 
-                // fill in ellipse data, some is constant
-                temp.Width = 47;
-                temp.Height = 47;
-                temp.Margin = new Thickness(p.X,0,0,p.Y);
-                temp.HorizontalAlignment = HorizontalAlignment.Left;
-                temp.VerticalAlignment= VerticalAlignment.Bottom;
-                temp.Fill = Brushes.White;
-                // Names ellipse so it can identify where it is
-                temp.Name = "Peg" + i;
-
-                if ( i == 4 )
+                if (i == 4)
                 {
-                    temp.Opacity = 0;    
+                    // invisible ellipse
+                    e = RenderEllipse(i, name, Brushes.Transparent, 0);
+                }
+                else
+                {
+                    e = RenderEllipse(i, name, Brushes.White, 1.0);
                 }
 
-                // adds to grid with game board
-                window.Game_Board_Grid.Children.Add(temp);
-
-                // adds ellipe to list
-                renderedHoles.Add(temp);
+                renderedHoles.Add(e);
 
                 // creates hole object for this ellipse and adds to list
                 holes.Add(new Hole(i));
             }
+        }
+
+
+        public Ellipse RenderEllipse(int position, string name, SolidColorBrush color, double opacity = 1)
+        {
+            Ellipse temp = new Ellipse();
+
+            // gets the left and bottom margin from the dictionary
+            (int left, int bottom) margin = PegPoints[position];
+
+            // fill in ellipse data, some is constant
+            temp.Width = 47;
+            temp.Height = 47;
+            temp.Margin = new Thickness(margin.left, 0, 0, margin.bottom);
+            temp.HorizontalAlignment = HorizontalAlignment.Left;
+            temp.VerticalAlignment = VerticalAlignment.Bottom;
+            temp.Fill = color;
+            // Names ellipse so it can identify where it is
+            temp.Name = name;
+            temp.Opacity = opacity;
+
+            // adds to grid with game board
+            window.Game_Board_Grid.Children.Add(temp);
+
+            return temp;
         }
 
 
@@ -102,7 +115,6 @@ namespace PegTest
         {
             var possibleMoves = GetValidMoves(start);
             var move = possibleMoves.Find(x => x.endPos == final);
-            //Console.WriteLine("DB: " + move);
 
             if (GetHole(move.endPos).isFilled())
             {
@@ -125,8 +137,6 @@ namespace PegTest
 
             // if all checks pass, move is valid; make move
             Console.WriteLine("Moving " + move.startPos + " to " + move.endPos);
-            //GetHole(move.startPos).MoveTo(GetHole(move.endPos));
-            //RemovePeg(GetHole(move.midPos));
             
             // TODO: Add appropriate logic to move the peg from the start position and move everything from hole object to hole object and not just update the gui
             foreach(Hole h in holes)
@@ -146,6 +156,7 @@ namespace PegTest
                     h.setFilled(true);
                 }
             }
+
             foreach (Ellipse e in renderedHoles)
             {
                 Ellipse ellipse = (Ellipse)e;
@@ -162,20 +173,24 @@ namespace PegTest
 
 
 
-                // Should probably remove from the renderedHoles instead of making transparent, or maybe this is okay?
+                // waits until after the foreach to modify the ellipses
                 if (position == move.startPos)
                 {
-                    ellipse.Fill = Brushes.Transparent;
+                    e.Fill = Brushes.Transparent;
                 }
                 else if (position == move.midPos)
                 {
-                    ellipse.Fill = Brushes.Transparent;
+                    e.Fill = Brushes.Transparent;
                 }
                 else if (position == move.endPos)
                 {
-                    ellipse.Fill = Brushes.White;
+                    e.Fill = Brushes.White;
+                    e.Opacity = 100;
                 }
+
+
             }
+
 
             return true;
         }
@@ -193,26 +208,11 @@ namespace PegTest
         // name represents where the move is (upper left = UL, Right = R, etc.)
         protected void generateMoveEllipse (int position, string name)
         {
-            Ellipse temp = new Ellipse();
+            Ellipse e;
+            
+            e = RenderEllipse(position, "Move" + position, Brushes.Green, 0.5);
 
-            // gets the left and bottom margin from the dictionary for the move ellipse's position
-            Point p = PegPoints[position];
-
-            // fill in ellipse data, some is constant
-            temp.Width = 47;
-            temp.Height = 47;
-            temp.Margin = new Thickness(p.X, 0, 0, p.Y);
-            temp.HorizontalAlignment = HorizontalAlignment.Left;
-            temp.VerticalAlignment = VerticalAlignment.Bottom;
-            temp.Fill = Brushes.Green;
-            temp.Opacity = 0.5;
-            temp.Name = "Move" + position;  // TODO: may have to also include name of position in the name (UL,UR, etc.)
-            // Names ellipse so it can identify where it is
-            temp.Name = "Move" + position;
-
-            // adds to grid with game board
-            window.Game_Board_Grid.Children.Add(temp);
-            renderedMoves.Add(temp);
+            renderedMoves.Add(e);
         }
 
 
@@ -224,16 +224,22 @@ namespace PegTest
         public void MoveCheck(int position)
         {
             // clears previously highlighted possible moves from game board
+            RemoveMoveEllipses();
+
+            // calculate possible moves
+            _ = GetValidMoves(position);
+
+        }
+
+        // clears previously highlighted possible moves from game board
+        public void RemoveMoveEllipses()
+        {
             foreach (Ellipse e in renderedMoves)
             {
                 window.Game_Board_Grid.Children.Remove(e);
             }
+
             renderedMoves.Clear();
-
-            // calculate possible moves
-            GetValidMoves(position);
-
-
         }
 
         // checks if hole exists / is within bounds

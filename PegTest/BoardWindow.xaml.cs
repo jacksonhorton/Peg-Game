@@ -61,11 +61,13 @@ namespace PegTest
                         // make move
                         board.MovePeg(startPos, endPosition);
 
+
                         startPos = -1;
                     }
 
+                    board.RemoveMoveEllipses();
 
-                    
+
                 }
             }
         }
@@ -75,7 +77,7 @@ namespace PegTest
             if (e.OriginalSource is Ellipse)
             {
                 Ellipse el = (Ellipse)e.OriginalSource;
-                el.Fill = Brushes.Purple;
+                //el.Fill = Brushes.Purple;
 
             }
 

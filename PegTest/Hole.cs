@@ -30,5 +30,17 @@ namespace PegTest
         {
             return peg.getPosition();
         }
+
+        public Peg GetPeg()
+        {
+            return peg;
+        }
+
+        //public void RemovePeg()
+
+        public void SetFilled(bool filled)
+        {
+            peg.setFilled(filled);
+        }
     }
 }
