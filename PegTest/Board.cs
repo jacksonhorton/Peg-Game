@@ -20,8 +20,8 @@ namespace PegTest
         private int numOfRows;
         private int numOfPegs;
         public Dictionary<int, (int, int)> PegPoints;
-        private List<Hole> holes;
-        private List<Ellipse> renderedHoles;
+        public List<Hole> holes;
+        public List<Ellipse> renderedHoles;
         private List<Ellipse> renderedMoves;
         private BoardWindow window;
         private CBValidMove moveChecker;

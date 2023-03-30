@@ -13,7 +13,7 @@ namespace PegTest
         public const int NumOfRows = 5;
 
 
-        private bool isPossibleMove(int start, int mid, int end, List<Hole> holes)
+        public override bool isPossibleMove(int start, int mid, int end, List<Hole> holes)
         {
             if (exists(start) && exists(mid) && exists(end))  // checks if middle/intermediate hole is filled
             {

@@ -7,7 +7,7 @@ using System.Windows.Shapes;
 
 namespace PegTest
 {
-    class Hole
+    public class Hole
     {
         protected Peg peg;
 
