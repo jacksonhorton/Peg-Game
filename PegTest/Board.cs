@@ -121,30 +121,14 @@ namespace PegTest
             var possibleMoves = moveChecker.GetValidMoves(start, holes);
             var move = possibleMoves.Find(x => x.endPos == final);
 
-
-
-            // TODO: move into move checker class
-            if (moveChecker.GetHole(move.endPos, holes).isFilled())
+            if (!moveChecker.isPossibleMove(move.startPos, move.midPos, move.endPos, holes))
             {
-                // Can't move if the final hole already has a peg in it
-                Console.WriteLine("Peg in destination hole, can't move from " + move.startPos + " to " + move.endPos);
-                return false;
-            }
-            else if (!moveChecker.GetHole(move.startPos, holes).isFilled())
-            {
-                // can't move start peg if there isn't a peg there
-                Console.WriteLine("No peg in start hole " + start);
-                return false;
-            }
-            else if (!moveChecker.GetHole(move.midPos, holes).isFilled())
-            {
-                // not intermediate peg present -> illegal move
-                Console.WriteLine("No intermediate peg to jump over at " + move.endPos);
+                // if the move is not valid, return false
                 return false;
             }
 
             
-            // TODO: make sure logic works
+            // modifies the holes container to reflect the move
             foreach(Hole h in holes)
             {
                 if (h.GetPosition() == move.startPos)
@@ -166,6 +150,7 @@ namespace PegTest
                 }
             }
 
+            // modifies the visible ellipses to reflect the move change
             foreach (Ellipse e in renderedHoles)
             {
                 Ellipse ellipse = (Ellipse)e;
@@ -182,7 +167,7 @@ namespace PegTest
 
 
 
-                // waits until after the foreach to modify the ellipses
+                // makes the ellipse transparent; is NOT deleted but no longer visible or clickable
                 if (position == move.startPos)
                 {
                     e.Fill = Brushes.Transparent;
@@ -202,9 +187,12 @@ namespace PegTest
 
 
             // check if there are any valid moves left
-            // TODO maybe use numofHoles instead of numOfPegs
             if (!moveChecker.anyValidMoves(holes)) {
-                //game over
+                //game over window load
+                GameOverWindow gameover = new GameOverWindow(numOfPegs);
+                gameover.Show();
+
+                // close game window
                 window.Close();
             }
 
@@ -224,6 +212,7 @@ namespace PegTest
         // name represents where the move is (upper left = UL, Right = R, etc.)
         protected void generateMoveEllipse (int position, string name)
         {
+            // generates a new ellipse at given position and renders it
             Ellipse e;
             
             e = RenderEllipse(position, "Move" + position, Brushes.Green, 0.5);
