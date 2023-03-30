@@ -26,9 +26,11 @@ namespace PegTest
 
             ConButton button = new ConButton();
 
-            button.Operation(this, 84, 32, 0, 0, MainGrid, EnumButton.PLAY);
+            button.Operation(this, 84, 32, 0, -125, MainGrid, EnumButton.PLAY);
+            button.Operation(this, 84, 32, 0, -25, MainGrid, EnumButton.HELP);
+            button.Operation(this, 84, 32, 0, 75, MainGrid, EnumButton.QUIT);
         }
 
-        
+
     }
 }

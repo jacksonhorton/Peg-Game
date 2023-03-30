@@ -29,11 +29,13 @@ namespace PegTest
             startPos = -1;
                 
             ConButton btn = new ConButton();
+
             btn.Operation(this, 84, 32, 650, -300, Board_Window_Grid, EnumButton.MENU);
             btn.Operation(this, 84, 32, 650, -200, Board_Window_Grid, EnumButton.RESET);
             btn.Operation(this, 84, 32, 650, -100, Board_Window_Grid, EnumButton.UNDO);
             btn.Operation(this, 84, 32, 650, 0, Board_Window_Grid, EnumButton.PAUSE);
             btn.Operation(this, 84, 32, 650, 350, Board_Window_Grid, EnumButton.QUIT);
+
         }
 
         
