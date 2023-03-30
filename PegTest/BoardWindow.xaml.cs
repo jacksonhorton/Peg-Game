@@ -27,14 +27,16 @@ namespace PegTest
             // creates new board and passes this window so it can control pegs
             board = new Board(5, 15, 14, this);
             startPos = -1;
+                
+            ConButton btn = new ConButton();
+            btn.Operation(this, 84, 32, 650, -300, Board_Window_Grid, EnumButton.MENU);
+            btn.Operation(this, 84, 32, 650, -200, Board_Window_Grid, EnumButton.RESET);
+            btn.Operation(this, 84, 32, 650, -100, Board_Window_Grid, EnumButton.UNDO);
+            btn.Operation(this, 84, 32, 650, 0, Board_Window_Grid, EnumButton.PAUSE);
+            btn.Operation(this, 84, 32, 650, 350, Board_Window_Grid, EnumButton.QUIT);
         }
 
-        private void Quit_Button_Click(object sender, RoutedEventArgs e)
-        {
-            Window window = new MainWindow();
-            window.Show();
-            this.Close();
-        }
+        
 
         private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

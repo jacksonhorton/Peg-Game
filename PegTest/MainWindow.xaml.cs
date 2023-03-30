@@ -23,13 +23,12 @@ namespace PegTest
         public MainWindow()
         {
             InitializeComponent();
+
+            ConButton button = new ConButton();
+
+            button.Operation(this, 84, 32, 0, 0, MainGrid, EnumButton.PLAY);
         }
 
-        private void Play_Button_Click(object sender, RoutedEventArgs e)
-        {
-            Window board = new BoardWindow();
-            board.Show();
-            this.Close();
-        }
+        
     }
 }

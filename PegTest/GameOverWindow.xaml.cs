@@ -14,9 +14,6 @@ using System.Windows.Shapes;
 
 namespace PegTest
 {
-    /// <summary>
-    /// Interaction logic for GameOverWindow.xaml
-    /// </summary>
     public partial class GameOverWindow : Window
     {
         public GameOverWindow(int PegsLeft)
@@ -24,6 +21,10 @@ namespace PegTest
             InitializeComponent();
             PegsLeftText.Text = "Number of pegs left: " + PegsLeft;
             InsultText.Text = GetInsult(PegsLeft);
+
+            ConButton QB = new ConButton();
+            QB.Operation(this, 84, 32, 0, 180, GameOverGrid, EnumButton.MENU);
+
         }
 
         private string GetInsult(int PegsLeft)

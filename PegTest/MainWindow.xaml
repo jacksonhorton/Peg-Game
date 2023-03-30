@@ -6,11 +6,11 @@
         xmlns:local="clr-namespace:PegTest"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid x:Name="MainGrid">
         <Grid.Background>
             <ImageBrush ImageSource="/blank-screen.png"/>
         </Grid.Background>
         <Label x:Name="Menu_Game_Title" Content="Peg Game" HorizontalAlignment="Left" Margin="270,23,0,0" VerticalAlignment="Top" Height="113" Width="422" FontSize="72" FontFamily="Sitka Text Semibold" FontWeight="Bold" Foreground="#FF5A1010"/>
-        <Button Content="Play Game" HorizontalAlignment="Left" Margin="432,217,0,0" VerticalAlignment="Top" Height="32" Width="100" Background="#FFBDBDBD" Click="Play_Button_Click"/>
+        
     </Grid>
 </Window>
