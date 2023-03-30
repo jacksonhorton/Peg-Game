@@ -18,7 +18,8 @@ namespace PegTest
     public class Board : UIElement
     {
         private int numOfRows;
-        private int numOfPegs;
+        private int numOfHoles;
+        private int numOfPegs;  // TODO decrement as pegs are removed/added
         public Dictionary<int, (int, int)> PegPoints;
         public List<Hole> holes;
         public List<Ellipse> renderedHoles;
@@ -27,7 +28,7 @@ namespace PegTest
         private CBValidMove moveChecker;
 
         // Constructor
-        public Board(int numOfRows, int numOfPegs, BoardWindow window)
+        public Board(int numOfRows, int numOfHoles, int numOfPegs, BoardWindow window)
         {
             this.window = window;
             moveChecker = new CBValidMove();
@@ -56,15 +57,17 @@ namespace PegTest
             holes = new List<Hole>();
             
             this.numOfRows = numOfRows;
+            this.numOfHoles = numOfHoles;
             this.numOfPegs = numOfPegs;
 
 
             // generates ellipses and Hole objects for each peg
-            for (int i=0; i<numOfPegs; i++)
+            for (int i=0; i<numOfHoles; i++)
             {
                 string name = "Peg" + i;
                 Ellipse e;
 
+                // the center peg on this board is empty when the game starts
                 if (i == 4)
                 {
                     // invisible ellipse
@@ -147,16 +150,19 @@ namespace PegTest
                 if (h.GetPosition() == move.startPos)
                 {
                     h.setFilled(false);
+                    numOfPegs--;
                 }
 
                 else if (h.GetPosition() == move.midPos)
                 {
                     h.setFilled(false);
+                    numOfPegs--;
                 }
 
                 else if (h.GetPosition() == move.endPos)
                 {
                     h.setFilled(true);
+                    numOfPegs++;
                 }
             }
 
@@ -194,6 +200,13 @@ namespace PegTest
 
             }
 
+
+            // check if there are any valid moves left
+            // TODO maybe use numofHoles instead of numOfPegs
+            if (!moveChecker.anyValidMoves(holes)) {
+                //game over
+                window.Close();
+            }
 
             return true;
         }

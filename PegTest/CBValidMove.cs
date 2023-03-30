@@ -9,8 +9,30 @@ namespace PegTest
     internal class CBValidMove : ValidStrat
     {
 
-        public const int NumOfPegs = 15;
+        public const int NumOfHoles = 15;
         public const int NumOfRows = 5;
+
+        public bool anyValidMoves(List<Hole> holes)
+        {
+            // start from first peg
+            for (int i = 0; i < NumOfHoles; i++)
+            {
+                // gets a list of possible valid moves for a peg
+                var validmoves = GetValidMoves(i, holes);
+                
+                // checks if any of the possible valid moves 
+                for (int j = 0; j < validmoves.Count; j++)
+                {
+                    if (isPossibleMove(validmoves[j].startPos, validmoves[j].midPos, validmoves[j].endPos, holes))
+                    {
+                        // return true, there is at least one possible move
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
 
 
         public override bool isPossibleMove(int start, int mid, int end, List<Hole> holes)
@@ -109,7 +131,7 @@ namespace PegTest
         // checks if hole exists / is within bounds
         private bool exists(int position)
         {
-            if (position >= 0 && position < NumOfPegs)
+            if (position >= 0 && position < NumOfHoles)
                 return true;
             else
                 return false;

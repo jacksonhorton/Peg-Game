@@ -25,7 +25,7 @@ namespace PegTest
         {
             InitializeComponent();
             // creates new board and passes this window so it can control pegs
-            board = new Board(5, 15, this);
+            board = new Board(5, 15, 14, this);
             startPos = -1;
         }
 
