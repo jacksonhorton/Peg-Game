@@ -33,9 +33,9 @@ namespace PegTest
                 case 1:
                     return "Not too poopy :)";
                 case 2:
-                    return "Could be better.";
+                    return "A baboon could do better";
                 case 3:
-                    return "BOOOOOOOO";
+                    return "You are made of stupid and bring shame on your family name";
                 default:
                     return "You ain't a smart feller, you're a fart smeller";
             }
