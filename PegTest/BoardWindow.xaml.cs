@@ -83,12 +83,8 @@ namespace PegTest
             if (e.OriginalSource is Ellipse)
             {
                 Ellipse el = (Ellipse)e.OriginalSource;
-                //el.Fill = Brushes.Purple;
 
             }
-
-            //// sets startPos to -1, like it is by default since it is no longer used
-            //startPos = -1;
         }
     }
 }

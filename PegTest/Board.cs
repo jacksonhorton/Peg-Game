@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Collections;
+using System.Threading;
 
 namespace PegTest
 {
@@ -263,7 +264,6 @@ namespace PegTest
                     e.Opacity = 100;
                 }
 
-
             }
 
             // add to previous moves stack
@@ -272,15 +272,24 @@ namespace PegTest
 
             // check if there are any valid moves left
             if (!moveChecker.anyValidMoves(holes)) {
-                //game over window load
-                GameOverWindow gameover = new GameOverWindow(numOfPegs);
-                gameover.Show();
-
-                // close game window
-                window.Close();
+                CloseGame(window);
             }
 
             return true;
+        }
+
+        async void CloseGame(Window w)
+        {
+            await Task.Delay(500);
+
+
+            //game over window load
+            GameOverWindow gameover = new GameOverWindow(numOfPegs);
+            gameover.Show();
+
+            // close game window
+            w.Close();
+
         }
 
 
