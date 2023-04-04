@@ -11,9 +11,9 @@ namespace PegTest
     {
         protected Peg peg;
 
-        public Hole(int position)
+        public Hole(int position, bool filled)
         {
-            peg = new Peg(position, position==4 ? false : true);
+            peg = new Peg(position, filled);
         }
         
         public bool isFilled()

@@ -21,6 +21,9 @@ namespace PegTest
     {
         private Board board;
         private int startPos;
+
+        public Board GetBoard() { return board; }
+
         public BoardWindow()
         {
             InitializeComponent();
@@ -49,7 +52,6 @@ namespace PegTest
                 // show possible moves if peg is clicked/held
                 if (ellipse.Name.Contains("Peg"))
                 {
-                    //int position = Int32.Parse(ellipse.Name.Substring(3, ellipse.Name.Length-1));
                     int position = Int32.Parse(ellipse.Name.Substring(3));
                     board.MoveCheck(position);
 

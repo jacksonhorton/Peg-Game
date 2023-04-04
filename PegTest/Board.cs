@@ -11,15 +11,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-
+using System.Collections;
 
 namespace PegTest
 {
     public class Board : UIElement
     {
+        private List<(int startPos, int midPos, int endPos)> previousMoves = new List<(int startPos, int midPos, int endPos)>();
+
         private int numOfRows;
         private int numOfHoles;
-        private int numOfPegs;  // TODO decrement as pegs are removed/added
+        private int numOfPegs;
         public Dictionary<int, (int, int)> PegPoints;
         public List<Hole> holes;
         public List<Ellipse> renderedHoles;
@@ -68,20 +70,23 @@ namespace PegTest
                 Ellipse e;
 
                 // the center peg on this board is empty when the game starts
-                if (i == 4)
+                if (i == 0)
                 {
                     // invisible ellipse
                     e = RenderEllipse(i, name, Brushes.Transparent, 0);
+                    // creates hole object for this ellipse and adds to list; empty since empty hole
+                    holes.Add(new Hole(i, false));
                 }
                 else
                 {
                     e = RenderEllipse(i, name, Brushes.White, 1.0);
+                    // creates hole object for this ellipse and adds to list
+                    holes.Add(new Hole(i, true));
                 }
 
                 renderedHoles.Add(e);
 
-                // creates hole object for this ellipse and adds to list
-                holes.Add(new Hole(i));
+                
             }
         }
 
@@ -116,6 +121,82 @@ namespace PegTest
         /*
          * Moving Logic
          */
+        public void undoMove()
+        {
+            if (previousMoves.Count == 0)
+            {
+                // no moves to undo
+                return;
+            }
+
+            // get current move and remove from list
+            int last = previousMoves.Count - 1;
+            var move = previousMoves[last];
+            previousMoves.RemoveAt(last);
+
+            // modifies hole objects to reverse the given move
+            foreach (Hole h in holes)
+            {
+                if (h.GetPosition() == move.startPos)
+                {
+                    h.setFilled(true);
+                    numOfPegs++;
+                }
+
+                else if (h.GetPosition() == move.midPos)
+                {
+                    h.setFilled(true);
+                    numOfPegs++;
+                }
+
+                else if (h.GetPosition() == move.endPos)
+                {
+                    h.setFilled(false);
+                    numOfPegs--;
+                }
+            }
+
+
+            // modifies the visible ellipses to reflect the move change
+            foreach (Ellipse e in renderedHoles)
+            {
+                Ellipse ellipse = (Ellipse)e;
+                int position = -1;
+                // gets position of the ellipse
+                if (ellipse.Name.Contains("Peg"))
+                {
+                    position = Int32.Parse(ellipse.Name.Substring(3));
+                }
+                else if (ellipse.Name.Contains("Move"))
+                {
+                    position = Int32.Parse(ellipse.Name.Substring(4));
+                }
+
+
+
+                // makes the ellipse transparent; is NOT deleted but no longer visible or clickable
+                if (position == move.startPos)
+                {
+                    e.Fill = Brushes.White;
+                    e.Opacity = 100;
+                }
+                else if (position == move.midPos)
+                {
+                    e.Fill = Brushes.White;
+                    e.Opacity = 100;
+                }
+                else if (position == move.endPos)
+                {
+                    e.Fill = Brushes.Transparent;
+                }
+
+
+            }
+
+
+
+        }
+
         public bool MovePeg(int start, int final)
         {
             var possibleMoves = moveChecker.GetValidMoves(start, holes);
@@ -184,6 +265,9 @@ namespace PegTest
 
 
             }
+
+            // add to previous moves stack
+            previousMoves.Add(move);
 
 
             // check if there are any valid moves left

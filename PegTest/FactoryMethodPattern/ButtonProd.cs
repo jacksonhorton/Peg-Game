@@ -91,6 +91,11 @@ namespace PegTest
                     board.Show();
                     w.Close();
                     break;
+                case EnumButton.UNDO:
+                    //scawwwyyyyy
+                    Board b =((BoardWindow)w).GetBoard();
+                    b.undoMove();
+                    break;
 
                 case EnumButton.PAUSE: 
                     break;
