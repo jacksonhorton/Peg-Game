@@ -10,8 +10,8 @@
         <ImageBrush ImageSource="/blank-screen.png" Stretch="UniformToFill"/>
     </Window.Background>
     <Grid x:Name="GameOverGrid">
-        <Label x:Name="Menu_Game_Title" Content="Game Over" HorizontalAlignment="Left" Margin="117,33,0,0" VerticalAlignment="Top" Height="113" Width="422" FontSize="72" FontFamily="Sitka Text Semibold" FontWeight="Bold" Foreground="#FF5A1010"/>
-        <TextBlock x:Name="PegsLeftText" HorizontalAlignment="Center" Margin="0,145,0,0" TextWrapping="Wrap" Text="uh oh...." VerticalAlignment="Top" Height="67" Width="194" FontSize="24"/>
-        <TextBlock x:Name="InsultText" HorizontalAlignment="Center" Margin="0,217,0,0" TextWrapping="Wrap" Text="uh oh...." VerticalAlignment="Top" Height="67" Width="320" FontSize="20"/>
+        <Label x:Name="Menu_Game_Title" Content="Game Over" HorizontalAlignment="Left" Margin="102,27,0,0" VerticalAlignment="Top" Height="113" Width="422" FontSize="72" FontFamily="Sitka Text Semibold" FontWeight="Bold" Foreground="#FF5A1010"/>
+        <TextBlock x:Name="PegsLeftText" HorizontalAlignment="Center" Margin="0,140,0,0" TextWrapping="Wrap" Text="uh oh...." VerticalAlignment="Top" Height="67" Width="194" FontSize="24"/>
+        <TextBlock x:Name="InsultText" HorizontalAlignment="Left" Margin="102,217,0,0" TextWrapping="Wrap" Text="uh oh...." VerticalAlignment="Top" Height="67" Width="320" FontSize="20"/>
     </Grid>
 </Window>

@@ -42,7 +42,7 @@ namespace PegTest
             {
                 Height = height,
                 Width = width,
-                Background = Brushes.Red,
+                Background = Brushes.OrangeRed,
                 IsHitTestVisible = true,
                 Content = Convert.ToString(enumB)
             };
