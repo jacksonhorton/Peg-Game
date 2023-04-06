@@ -29,6 +29,21 @@ namespace PegTest
             button.Operation(this, 84, 32, 0, -125, MainGrid, EnumButton.PLAY);
             button.Operation(this, 84, 32, 0, -25, MainGrid, EnumButton.HELP);
             button.Operation(this, 84, 32, 0, 75, MainGrid, EnumButton.QUIT);
+
+            TextBlock t = new TextBlock()
+            {
+                Width = 500,
+                Height = 60,
+                Margin = new Thickness(0,330,0,0),
+                Text = "Developed & Created by William Hayes & Jackson Horton\n" + "University of Tennessee at Martin, Department of Computer Science",
+                FontSize = 14,
+                FontFamily = new FontFamily("Strika Text"),
+                HorizontalAlignment = HorizontalAlignment.Center,
+                TextAlignment = TextAlignment.Center,
+            };
+
+            MainGrid.Children.Add(t);
+            MainGrid.UpdateLayout();
         }
 
 

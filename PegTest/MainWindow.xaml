@@ -12,5 +12,6 @@
         </Grid.Background>
         <Label x:Name="Menu_Game_Title" Content="Peg Game" HorizontalAlignment="Left" Margin="270,23,0,0" VerticalAlignment="Top" Height="113" Width="422" FontSize="72" FontFamily="Sitka Text Semibold" FontWeight="Bold" Foreground="#FF5A1010"/>
         
+
     </Grid>
 </Window>

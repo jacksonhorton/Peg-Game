@@ -24,6 +24,7 @@ namespace PegTest
             InsultText.Text = GetInsult(PegsLeft);
 
             ConButton Btn = new ConButton();
+
             Btn.Operation(this, 84, 32, 0, 180, GameOverGrid, EnumButton.MENU);
             Btn.Operation(this, 84, 32, 0, 270, GameOverGrid, EnumButton.RESET);
             Btn.Operation(this, 84, 32, 0, 360, GameOverGrid, EnumButton.QUIT);
