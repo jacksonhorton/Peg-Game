@@ -32,7 +32,7 @@ namespace PegTest
                 "(Valid move positions will be highlighted in green).\n" +
                 "2. If a peg is jumped over it is removed from the board.\n" +
                 "3. The aim is to get to as close to 1 peg remaining as possible.\n" +
-                "4. Once the player run out of valid moves to make or have 1 peg left, the game ends.\n\n" +
+                "4. Once the player runs out of valid moves to make or have 1 peg left, the game ends.\n\n" +
                 "Features:\n" +
                 "1. Menu- Return to the main menu.\n" +
                 "2. Quit- Quits the program.\n" +
