@@ -85,6 +85,9 @@ namespace PegTest
                     break;
 
                 case EnumButton.HELP:
+                    HelpWindow help = new HelpWindow();
+                    help.Show();
+                    w.Close();
                     break;
 
                 case EnumButton.RESET:
