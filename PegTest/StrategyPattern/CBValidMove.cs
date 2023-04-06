@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * @file: CBValidMove.cs
+ * @authors: William Hayes & Jackson Horton
+ * @date:4/6/2023
+ * @brief: This is a concrete strategy class.
+ * 
+ * This class implements the isPossibleMove method and any helper methods
+ * to create a valid move checking algorithm for a triangular gameboard.
+ * 
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
