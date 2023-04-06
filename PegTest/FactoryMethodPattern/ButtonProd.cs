@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
+using System.Windows.Automation.Peers;
 
 namespace PegTest
 {
@@ -20,7 +21,6 @@ namespace PegTest
         Grid g;
         EnumButton enumB;
 
-        
         public ButtonProd(Window w, double width, double height, int left, int top, Grid g, EnumButton e) 
         {
             this.w = w;
@@ -65,6 +65,7 @@ namespace PegTest
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            
             switch(enumB)
             {
                 case EnumButton.MENU:
@@ -74,7 +75,7 @@ namespace PegTest
                     break;
 
                 case EnumButton.QUIT:
-                    w.Close();
+                    Environment.Exit(0); //closes all windows in the program
                     break;
 
                 case EnumButton.PLAY:
@@ -91,15 +92,24 @@ namespace PegTest
                     board.Show();
                     w.Close();
                     break;
+
                 case EnumButton.UNDO:
                     //scawwwyyyyy
                     Board b =((BoardWindow)w).GetBoard();
                     b.undoMove();
                     break;
 
-                case EnumButton.PAUSE: 
+                case EnumButton.PAUSE:
+                    PauseWindow temp = new PauseWindow(w);
+                    temp.HidePausedWindow();
+                    temp.Show();
+
                     break;
 
+                case EnumButton.RESUME:
+                    ((PauseWindow)w).RenderPausedWindow();
+                    w.Close();
+                    break;
 
                 default:
                     break;

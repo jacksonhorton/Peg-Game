@@ -19,6 +19,7 @@ namespace PegTest
         public GameOverWindow(int PegsLeft)
         {
             InitializeComponent();
+
             PegsLeftText.Text = "Number of pegs left: " + PegsLeft;
             InsultText.Text = GetInsult(PegsLeft);
 

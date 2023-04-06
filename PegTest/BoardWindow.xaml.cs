@@ -22,7 +22,9 @@ namespace PegTest
         private Board board;
         private int startPos;
 
+        
         public Board GetBoard() { return board; }
+
 
         public BoardWindow()
         {
@@ -38,6 +40,8 @@ namespace PegTest
             btn.Operation(this, 84, 32, 650, -100, Board_Window_Grid, EnumButton.UNDO);
             btn.Operation(this, 84, 32, 650, 0, Board_Window_Grid, EnumButton.PAUSE);
             btn.Operation(this, 84, 32, 650, 350, Board_Window_Grid, EnumButton.QUIT);
+
+            
 
         }
 

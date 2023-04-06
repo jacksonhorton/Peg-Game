@@ -14,6 +14,7 @@ namespace PegTest
         PAUSE,
         HELP,
         UNDO,
-        MENU
+        MENU,
+        RESUME
     }
 }

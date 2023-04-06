@@ -10,11 +10,13 @@
   <ItemGroup>
     <None Remove="blank-screen.png" />
     <None Remove="board.png" />
+    <None Remove="pause.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="blank-screen.png" />
     <Resource Include="board.png" />
+    <Resource Include="pause.png" />
   </ItemGroup>
 
 </Project>
