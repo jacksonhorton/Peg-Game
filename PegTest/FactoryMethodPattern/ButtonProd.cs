@@ -99,6 +99,7 @@ namespace PegTest
                 case EnumButton.UNDO:
                     //scawwwyyyyy
                     Board b =((BoardWindow)w).GetBoard();
+                    b.RemoveMoveEllipses();
                     b.undoMove();
                     break;
 
