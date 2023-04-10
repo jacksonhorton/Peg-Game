@@ -16,6 +16,20 @@ Open the solution file in Visual Studio 2022 and build the solution. The game wi
 * A move highlighter. When a peg is clicked, any possible moves are highlighted to help the player visualize their possible moves.
 * The game over screen displays the score and a quip based on the value of their score. It really encourages the player to do better.
 
+# Timeline
+We had many goals and design choices when we entered this project outlined in our proposal. Here is a reflection on what we have implemented so far and what is still possibly to come:
+- [x] Board creation
+- [x] Rule enforcement (jumping and moving)
+- [x] Pause button
+- [ ] Timer
+- [ ] Leaderboard
+- [x] Undo button
+- [ ] Multiple boards
+- [x] Menu Screen
+- [x] Game-over screen when there is no valid moves
+- [x] Help/Instructions screen
+- [x] Valid move checker
+
 # Design Decisions and Notes
 * We added strategy pattern for the valid move checking algorithm. We figured this would make things easier when we add multiple board shapes, because
 differently shaped boards will require different algorithms for checking valid moves. So, we can just use a strategy pattern to create and use these
