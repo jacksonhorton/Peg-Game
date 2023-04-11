@@ -4,7 +4,8 @@
  * @date:4/6/2023
  * @brief:
  * 
- * 
+ * This board class holds the contents of the game board (Cracker barrel board specifically).
+ * Eventually, this may be an abstarct class so that multiple board types can be created and swapped out.
  * 
  */
 using System;
@@ -27,19 +28,27 @@ namespace PegTest
 {
     public class Board : UIElement
     {
+        
         private List<(int startPos, int midPos, int endPos)> previousMoves = new List<(int startPos, int midPos, int endPos)>();
 
         private int numOfRows;
         private int numOfHoles;
         private int numOfPegs;
-        public Dictionary<int, (int, int)> PegPoints;
-        public List<Hole> holes;
-        public List<Ellipse> renderedHoles;
+        private Dictionary<int, (int, int)> PegPoints;
+        private List<Hole> holes;
+        private List<Ellipse> renderedHoles;
         private List<Ellipse> renderedMoves;
         private BoardWindow window;
         private CBValidMove moveChecker;
 
-        // Constructor
+        /**
+         * Constructor
+         * Some parameters could be already set, but leaving them as parameters makes it an easier
+         * transition if we move to making this an abstract class.
+         * @param   numOfRows   the number of rows for a board
+         * @param   numOfHoles  the number of holes on the board
+         * @param   window      the Window object associated with the game so changes can be made
+         */
         public Board(int numOfRows, int numOfHoles, int numOfPegs, BoardWindow window)
         {
             this.window = window;
@@ -101,6 +110,14 @@ namespace PegTest
         }
 
 
+        /**
+         * This function renders an Ellipse at a given position on the board
+         * @param   position    the position on the board where the ellipse should be drawn
+         * @param   name        the name assigned to the ellipse; used to destinguish between move ellipses and peg ellipses
+         * @param   color       the color of the ellipse to be rendered
+         * @param   opacity     the opacity of the ellipse to be rendered
+         * @return  Ellipse     The Ellipse that is rendered
+         */
         public Ellipse RenderEllipse(int position, string name, SolidColorBrush color, double opacity = 1)
         {
             Ellipse temp = new Ellipse();
@@ -127,9 +144,12 @@ namespace PegTest
 
 
 
-
-        /*
-         * Moving Logic
+        ///
+        /// Moving Logic
+        /// 
+        /**
+         * Reverses the last move in the previousMoves list if there is a move
+         * @return  void
          */
         public void undoMove()
         {
@@ -207,6 +227,13 @@ namespace PegTest
 
         }
 
+
+        /**
+         * Moves a peg on the board from one position to another if the move is valid.
+         * @param   start   the position of the hole the peg should move
+         * @param   final   the final position of the hole the peg should be moved to
+         * @return  bool    whether or not the move was performed
+         */
         public bool MovePeg(int start, int final)
         {
             var possibleMoves = moveChecker.GetValidMoves(start, holes);
@@ -287,7 +314,15 @@ namespace PegTest
             return true;
         }
 
-        async void CloseGame(Window w)
+
+
+        /**
+         * Ends the game and moves to the game over screen after a short delay; more visually appealing
+         * than instantly cutting off the game
+         * @param   window  The current game window to be closed
+         * @return  void
+         */
+        async void CloseGame(Window window)
         {
             await Task.Delay(500);
 
@@ -297,21 +332,23 @@ namespace PegTest
             gameover.Show();
 
             // close game window
-            w.Close();
+            window.Close();
 
         }
 
 
 
+        ///
+        /// Movechecker visual functions/generate ellipses for moves
+        ///
 
-
-
-        /*
-         * Movechecker visual functions/generate ellipses for moves
+        /**
+         * Creates an ellipse, calls for it to be rendered, and adds it to the list of rendered ellipses
+         * name represents where the move is (upper left = UL, Right = R, etc.)
+         * @param   int the position where the ellipse should be generated
+         * @param   string  the name of the ellipse to be generated
+         * @return  void
          */
-
-
-        // name represents where the move is (upper left = UL, Right = R, etc.)
         protected void generateMoveEllipse (int position, string name)
         {
             // generates a new ellipse at given position and renders it
@@ -323,11 +360,15 @@ namespace PegTest
         }
 
 
-        /*
-         * Move Checker logic functions
-         */
+        ///
+        /// Move Checker logic functions
+        ///
 
-        // handles creation of move ellipses and check valid moves and deletes previously generated moves
+        /**
+         * handles creation of move ellipses and check valid moves and deletes previously generated moves
+         * @param   position    the position where the move should be checked and generated if they exist
+         * @return  void
+         */
         public void MoveCheck(int position)
         {
             // clears previously highlighted possible moves from game board
@@ -344,7 +385,11 @@ namespace PegTest
 
         }
 
-        // clears previously highlighted possible moves from game board
+
+        /**
+         * clears previously highlighted possible moves from game board
+         * @return  void
+         */
         public void RemoveMoveEllipses()
         {
             foreach (Ellipse e in renderedMoves)
