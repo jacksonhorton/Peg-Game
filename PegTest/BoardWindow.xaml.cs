@@ -2,10 +2,7 @@
  * @file:
  * @authors: William Hayes & Jackson Horton
  * @date:4/6/2023
- * @brief:
- * 
- * 
- * 
+ * @brief: This window is where the game is played. It contains the pegs, holes, and interaction logic.
  */
 using System;
 using System.Collections.Generic;
@@ -23,18 +20,21 @@ using System.Windows.Shapes;
 
 namespace PegTest
 {
-    /// <summary>
-    /// Interaction logic for Window1.xaml
-    /// </summary>
     public partial class BoardWindow : Window
     {
         private Board board;
         private int startPos;
 
-        
+        /**
+         * Returns the Board object associated with this BoardWindow
+         * @return  Board   the Board associated with this BoardWindow
+         */
         public Board GetBoard() { return board; }
 
 
+        /**
+         * Constructor
+         */
         public BoardWindow()
         {
             InitializeComponent();
@@ -55,7 +55,13 @@ namespace PegTest
         }
 
         
-
+        /**
+         * Clicking logic for the game board.
+         * When a peg is clicked, generate valid move ellipses; if a valid move ellipse, execute the move.
+         * @param   sender  reference to event sender
+         * @param   e       event data
+         * @return  void
+         */
         private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.OriginalSource is Ellipse)
@@ -91,6 +97,13 @@ namespace PegTest
             }
         }
 
+
+        /**
+         * Possible implementation to allow dragging from one peg to a move ellipse for easier play.
+         * @param   sender  reference to event sender
+         * @param   e       event data
+         * @return  void
+         */
         private void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (e.OriginalSource is Ellipse)
