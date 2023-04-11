@@ -1,11 +1,17 @@
 ﻿/*
- * @file:
+ * @file: ButtonProd.cs
  * @authors: William Hayes & Jackson Horton
  * @date:4/6/2023
- * @brief:
+ * @brief: The concrete Buttons product.
  * 
- * 
- * 
+ * This file contain the ButtonProd class which functions
+ * as the concrete product of Buttons. It implements the Render()
+ * method to create a button UI element in a window, by using the data members
+ * stored from the constructor. It also implements the Button Click method to add functionality
+ * to each button which clicked. Using the button object's respective Enum value to determine 
+ * functionality, the buttons created can: open the menu window, close the entire program, restart
+ * the game board, undo moves, open the help screen, pause and resume the game, and create a new game board
+ * window.
  */
 using System;
 using System.Collections.Generic;
@@ -30,6 +36,17 @@ namespace PegTest
         Grid g;
         EnumButton enumB;
 
+        /*
+         * Constructor
+         * 
+         * @para window w, the window w that is creating a new button.
+         * @para double width, the width of the button
+         * @para double height, the height of the button
+         * @para int left, the position of the left margin
+         * @para int top, the position of th etop margin
+         * @para Grid g, w's specified grid that will contain the button
+         * @para EnumButton e, the enum value of the button, using to determine functionality when clicked.
+         */
         public ButtonProd(Window w, double width, double height, int left, int top, Grid g, EnumButton e) 
         {
             this.w = w;
@@ -45,6 +62,11 @@ namespace PegTest
             this.enumB = e;
         }
 
+        /*
+         * Renders the newly instantiated buttonProd as a UI element in the desired window and grid, using the 
+         * data member collected from the constructor.
+         * 
+         */
         public void Render()
         {
             Button b = new Button()
@@ -72,6 +94,11 @@ namespace PegTest
             g.UpdateLayout();
         }
 
+        /*
+         * This method add functionality to the buttons when clicked, using the ButtonProd object's
+         * store EnumButton value to determine its functionality via a switch statement.
+         * 
+         */
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             
