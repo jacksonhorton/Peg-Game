@@ -2,10 +2,7 @@
  * @file:
  * @authors: William Hayes & Jackson Horton
  * @date:4/6/2023
- * @brief:
- * 
- * 
- * 
+ * @brief:  The Window that shows game instructions and helps the user.
  */
 using System;
 using System.Collections.Generic;
@@ -29,6 +26,9 @@ namespace PegTest
     /// </summary>
     public partial class HelpWindow : Window
     {
+        /**
+         * Constructor
+         */
         public HelpWindow()
         {
             InitializeComponent();
@@ -58,6 +58,14 @@ namespace PegTest
             Btn.Operation(this, 84, 32, 400, 300, Help_Grid, EnumButton.QUIT);
         }
 
+        
+        /**
+         * Generates the text on the help window
+         * @param   text    text to be written on this Window
+         * @param   left    left margin position on Window
+         * @param   top     top margin position on Window
+         * @return  void
+         */
         private void generateText(string text, double left, double top)
         {
             Label l = new Label()

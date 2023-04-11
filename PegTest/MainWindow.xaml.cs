@@ -2,10 +2,8 @@
  * @file:
  * @authors: William Hayes & Jackson Horton
  * @date:4/6/2023
- * @brief:
- * 
- * 
- * 
+ * @brief:  The MainWindow is the menu screen where the program starts.
+ * Has additional functionality like help screen and possibly a leaderboard in the future.
  */
 using System;
 using System.Collections.Generic;
@@ -29,6 +27,9 @@ namespace PegTest
     /// </summary>
     public partial class MainWindow : Window
     {
+        /**
+         * Constructor
+         */
         public MainWindow()
         {
             InitializeComponent();

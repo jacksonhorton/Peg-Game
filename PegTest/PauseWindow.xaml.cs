@@ -2,10 +2,7 @@
  * @file:
  * @authors: William Hayes & Jackson Horton
  * @date:4/6/2023
- * @brief:
- * 
- * 
- * 
+ * @brief: The pause Window for the game.
  */
 using System;
 using System.Collections.Generic;
@@ -31,6 +28,11 @@ namespace PegTest
     public partial class PauseWindow : Window
     {
         Window window;
+
+        /**
+         * Constructor
+         * @param   window  The window that is being paused that the program will return to.
+         */
         public PauseWindow(Window window)
         {
             this.window = window;
@@ -62,12 +64,21 @@ namespace PegTest
             PauseGrid.UpdateLayout();
         }
 
+
+        /**
+         * Hides the open window (probably the BoardWindow where the game is being played)
+         * @return  void
+         */
         public void HidePausedWindow()
         {
             window.Visibility = Visibility.Hidden;
             window.ShowInTaskbar = false;
         }
 
+        /**
+         * Makes the hidden Window visible again
+         * @return  void
+         */
         public void RenderPausedWindow()
         {
             window.Visibility = Visibility.Visible;
