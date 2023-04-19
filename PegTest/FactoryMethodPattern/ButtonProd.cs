@@ -133,13 +133,14 @@ namespace PegTest
                     break;
 
                 case EnumButton.UNDO:
-                    //scawwwyyyyy
+                    //scawwwyyyy
                     Board b =((BoardWindow)w).GetBoard();
                     b.RemoveMoveEllipses();
                     b.undoMove();
                     break;
 
                 case EnumButton.PAUSE:
+                    // timer is stopped by PauseWindow
                     PauseWindow temp = new PauseWindow(w);
                     temp.HidePausedWindow();
                     temp.Show();
@@ -147,6 +148,7 @@ namespace PegTest
                     break;
 
                 case EnumButton.RESUME:
+                    // timer is restarted by PauseWindow
                     ((PauseWindow)w).RenderPausedWindow();
                     w.Close();
                     break;

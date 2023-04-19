@@ -16,6 +16,7 @@
             </Grid.Background>
             <!--Where ellipses are added to represent pegs-->
         </Grid>
-        
+        <TextBlock x:Name="TimerText" Margin="10,379,0,0" TextWrapping="Wrap" Text="0:00" VerticalAlignment="Top" Height="45" FontSize="28" FontWeight="Bold" FontStyle="Italic" Foreground="#FF6C0000" HorizontalAlignment="Left" Width="82"/>
+
     </Grid>
 </Window>

@@ -27,7 +27,7 @@ namespace PegTest
     /// </summary>
     public partial class PauseWindow : Window
     {
-        Window window;
+        BoardWindow window;
 
         /**
          * Constructor
@@ -35,7 +35,8 @@ namespace PegTest
          */
         public PauseWindow(Window window)
         {
-            this.window = window;
+            this.window = (BoardWindow)window;
+            this.window.StopTimer();
 
             InitializeComponent();
 
@@ -81,6 +82,7 @@ namespace PegTest
          */
         public void RenderPausedWindow()
         {
+            window.StartTimer();
             window.Visibility = Visibility.Visible;
             window.ShowInTaskbar = true;
         }
