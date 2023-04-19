@@ -45,7 +45,7 @@ namespace PegTest
             board = new Board(5, 15, 14, this);
             startPos = -1;
             // creates timer for board
-            TimerText.Text = "0:50";
+            TimerText.Text = "0:00";
             timer = new System.Windows.Forms.Timer();
             timer.Tick += new EventHandler(TimerTick);
             timer.Interval = 1000; // in miliseconds
@@ -58,9 +58,6 @@ namespace PegTest
             btn.Operation(this, 84, 32, 650, -100, Board_Window_Grid, EnumButton.UNDO);
             btn.Operation(this, 84, 32, 650, 0, Board_Window_Grid, EnumButton.PAUSE);
             btn.Operation(this, 84, 32, 650, 350, Board_Window_Grid, EnumButton.QUIT);
-
-            
-
         }
 
         /**
@@ -177,7 +174,6 @@ namespace PegTest
             if (e.OriginalSource is Ellipse)
             {
                 Ellipse el = (Ellipse)e.OriginalSource;
-
             }
         }
     }

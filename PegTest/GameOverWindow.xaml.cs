@@ -25,10 +25,11 @@ namespace PegTest
 {
     public partial class GameOverWindow : Window
     {
-        public GameOverWindow(int PegsLeft)
+        public GameOverWindow(int PegsLeft, string time)
         {
             InitializeComponent();
 
+            TimerText.Text = "Time taken:\n" + time;
             PegsLeftText.Text = "Number of pegs left: " + PegsLeft;
             InsultText.Text = GetInsult(PegsLeft);
 

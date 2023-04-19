@@ -322,13 +322,12 @@ namespace PegTest
          * @param   window  The current game window to be closed
          * @return  void
          */
-        async void CloseGame(Window window)
+        async void CloseGame(BoardWindow window)
         {
             await Task.Delay(500);
 
-
             //game over window load
-            GameOverWindow gameover = new GameOverWindow(numOfPegs);
+            GameOverWindow gameover = new GameOverWindow(numOfPegs, window.TimerText.Text);
             gameover.Show();
 
             // close game window
