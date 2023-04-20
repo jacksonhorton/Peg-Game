@@ -133,8 +133,8 @@ namespace PegTest
                     break;
 
                 case EnumButton.UNDO:
-                    //scawwwyyyy
-                    Board b =((BoardWindow)w).GetBoard();
+                    // Gets board object, undoes last move, clears move elipses
+                    Board b =((BoardWindow)w).GetBoard(); //scawwwyyyy
                     b.RemoveMoveEllipses();
                     b.undoMove();
                     break;
@@ -151,6 +151,11 @@ namespace PegTest
                     // timer is restarted by PauseWindow
                     ((PauseWindow)w).RenderPausedWindow();
                     w.Close();
+                    break;
+
+                case EnumButton.SAVE:
+                    // prompts user for name to save to leaderboard
+
                     break;
 
                 default:

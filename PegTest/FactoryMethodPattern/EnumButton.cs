@@ -24,6 +24,7 @@ namespace PegTest
         HELP, //help button
         UNDO, //undo button
         MENU, //menu button
-        RESUME //resume button
+        RESUME, //resume button
+        SAVE // save button
     }
 }
