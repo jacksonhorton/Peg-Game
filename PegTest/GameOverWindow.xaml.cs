@@ -25,11 +25,19 @@ namespace PegTest
 {
     public partial class GameOverWindow : Window
     {
-        public GameOverWindow(int PegsLeft, string time)
+        public GameOverWindow(int PegsLeft, int timeInSeconds)
         {
             InitializeComponent();
 
-            TimerText.Text = "Time taken: " + time;
+            ///Formats time string
+            // calculate seconds and minutes
+            int min = timeInSeconds / 60;
+            int sec = timeInSeconds % 60;
+
+            // Update timertext with formatting
+            string timeString = $"{min}:{sec:D2}";
+
+            TimerText.Text = "Time taken: " + timeString;
             PegsLeftText.Text = "Number of pegs left: " + PegsLeft;
             InsultText.Text = GetInsult(PegsLeft);
 
