@@ -21,7 +21,7 @@ We had many goals and design choices when we entered this project outlined in ou
 - [x] Board creation
 - [x] Rule enforcement (jumping and moving)
 - [x] Pause button
-- [ ] Timer
+- [x] Timer
 - [ ] Leaderboard
 - [x] Undo button
 - [ ] Multiple boards
