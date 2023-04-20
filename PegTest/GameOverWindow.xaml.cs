@@ -29,15 +29,15 @@ namespace PegTest
         {
             InitializeComponent();
 
-            TimerText.Text = "Time taken:\n" + time;
+            TimerText.Text = "Time taken: " + time;
             PegsLeftText.Text = "Number of pegs left: " + PegsLeft;
             InsultText.Text = GetInsult(PegsLeft);
 
             ConButton Btn = new ConButton();
 
-            Btn.Operation(this, 84, 32, 0, 180, GameOverGrid, EnumButton.MENU);
-            Btn.Operation(this, 84, 32, 0, 270, GameOverGrid, EnumButton.RESET);
-            Btn.Operation(this, 84, 32, 0, 360, GameOverGrid, EnumButton.QUIT);
+            Btn.Operation(this, 84, 32, 0, 200, GameOverGrid, EnumButton.MENU);
+            Btn.Operation(this, 84, 32, 0, 290, GameOverGrid, EnumButton.RESET);
+            Btn.Operation(this, 84, 32, 0, 380, GameOverGrid, EnumButton.QUIT);
 
         }
 

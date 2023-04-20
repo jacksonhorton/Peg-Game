@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PegTest"
         mc:Ignorable="d"
-        Title="GameOverWindow" Height="450" Width="563">
+        Title="GameOverWindow" Height="485" Width="622">
     <Window.Background>
         <ImageBrush ImageSource="/blank-screen.png" Stretch="UniformToFill"/>
     </Window.Background>
     <Grid x:Name="GameOverGrid">
-        <Label x:Name="Menu_Game_Title" Content="Game Over" HorizontalAlignment="Left" Margin="102,27,0,0" VerticalAlignment="Top" Height="113" Width="422" FontSize="72" FontFamily="Sitka Text Semibold" FontWeight="Bold" Foreground="#FF5A1010"/>
+        <Label x:Name="Menu_Game_Title" Content="Game Over" HorizontalAlignment="Center" Margin="0,30,0,0" VerticalAlignment="Top" Height="114" Width="422" FontSize="72" FontFamily="Sitka Text Semibold" FontWeight="Bold" Foreground="#FF5A1010"/>
         <TextBlock x:Name="PegsLeftText" TextAlignment="Center" HorizontalAlignment="Center" Margin="0,110,0,0" TextWrapping="Wrap" Text="uh oh...." VerticalAlignment="Top" Height="67" Width="194" FontSize="24"/>
         <TextBlock x:Name="InsultText" TextAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Text="uh oh...." VerticalAlignment="Top" Height="67" Width="320" FontSize="20" Margin="0,182,0,0"/>
-        <TextBlock x:Name="TimerText" TextAlignment="Left" HorizontalAlignment="Left" Margin="26,293,0,0" TextWrapping="Wrap" Text="uh oh...." VerticalAlignment="Top" Height="67" Width="168" FontSize="24" FontWeight="Bold"/>
+        <TextBlock x:Name="TimerText" TextAlignment="Center" HorizontalAlignment="Center" Margin="0,254,0,0" TextWrapping="Wrap" Text="uh oh...." VerticalAlignment="Top" Height="67" Width="401" FontSize="24" FontWeight="Bold"/>
     </Grid>
 </Window>
