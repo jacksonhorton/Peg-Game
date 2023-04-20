@@ -4,7 +4,7 @@ Names: William Hayes & Jackson Horton
 Date: 4/4/2023
 
 # Purpose
-
+The purpose of this program is to implement a peg solitaire game using Visual Studios and C#. 
 
 # Compilation Instructions
 Open the solution file in Visual Studio 2022 and build the solution. The game will run automatically.
