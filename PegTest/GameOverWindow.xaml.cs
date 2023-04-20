@@ -50,9 +50,9 @@ namespace PegTest
                 case 2:
                     return "A baboon could do better";
                 case 3:
-                    return "You are made of stupid and bring shame on your family name";
-                default:
                     return "You ain't a smart feller, you're a fart smeller";
+                default:
+                    return "You are made of stupid and bring shame on your family name";
             }
 
         }
