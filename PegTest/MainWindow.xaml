@@ -5,13 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PegTest"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" ResizeMode="NoResize">
     <Grid x:Name="MainGrid">
         <Grid.Background>
             <ImageBrush ImageSource="/blank-screen.png"/>
         </Grid.Background>
         <Label x:Name="Menu_Game_Title" Content="Peg Game" HorizontalAlignment="Left" Margin="270,23,0,0" VerticalAlignment="Top" Height="113" Width="422" FontSize="72" FontFamily="Sitka Text Semibold" FontWeight="Bold" Foreground="#FF5A1010"/>
-        
+        <Rectangle HorizontalAlignment="Left" Height="4" Margin="447,144,0,0" VerticalAlignment="Top" Width="367" Fill="#FF5A1010">
+            <Rectangle.Effect>
+                <DropShadowEffect/>
+            </Rectangle.Effect>
+        </Rectangle>
+        <Label x:Name="LB_Name_title" Content="Name" HorizontalAlignment="Left" Margin="453,113,0,0" VerticalAlignment="Top" Height="31" Width="94" FontSize="20    " FontFamily="Sitka Text Semibold" FontWeight="Bold" Foreground="#FF5A1010"/>
+        <Label x:Name="LB_Pegs_Left_title" Content="Pegs left" HorizontalAlignment="Left" Margin="596,113,0,0" VerticalAlignment="Top" Height="33" Width="94" FontSize="20    " FontFamily="Sitka Text Semibold" FontWeight="Bold" Foreground="#FF5A1010"/>
+        <Label x:Name="LB_Time_title" Content="Time" HorizontalAlignment="Left" Margin="706,113,0,0" VerticalAlignment="Top" Height="31" Width="94" FontSize="20    " FontFamily="Sitka Text Semibold" FontWeight="Bold" Foreground="#FF5A1010"/>
+        <Label x:Name="Leader_1_name" Content="" HorizontalAlignment="Left" Margin="453,168,0,0" VerticalAlignment="Top" Height="31" Width="138" FontSize="20    " FontFamily="Sitka Text Semibold" FontWeight="Bold" Foreground="#FF5A1010"/>
+        <Label x:Name="Leader_2_name" Content="" HorizontalAlignment="Left" Margin="453,204,0,0" VerticalAlignment="Top" Height="31" Width="138" FontSize="20    " FontFamily="Sitka Text Semibold" FontWeight="Bold" Foreground="#FF5A1010"/>
+        <Label x:Name="Leader_4_name" Content="" HorizontalAlignment="Left" Margin="453,276,0,0" VerticalAlignment="Top" Height="31" Width="138" FontSize="20    " FontFamily="Sitka Text Semibold" FontWeight="Bold" Foreground="#FF5A1010"/>
+        <Label x:Name="Leader_5_name" Content="" HorizontalAlignment="Left" Margin="453,312,0,0" VerticalAlignment="Top" Height="31" Width="138" FontSize="20    " FontFamily="Sitka Text Semibold" FontWeight="Bold" Foreground="#FF5A1010"/>
+        <Label x:Name="Leader_3_name" Content="" HorizontalAlignment="Left" Margin="453,240,0,0" VerticalAlignment="Top" Height="31" Width="138" FontSize="20    " FontFamily="Sitka Text Semibold" FontWeight="Bold" Foreground="#FF5A1010"/>
+        <Label x:Name="Leader_1_pegs" Content="" HorizontalAlignment="Left" Margin="615,168,0,0" VerticalAlignment="Top" Height="31" Width="51" FontSize="20    " FontFamily="Sitka Text Semibold" FontWeight="Bold" Foreground="#FF5A1010"/>
+        <Label x:Name="Leader_2_pegs" Content="" HorizontalAlignment="Left" Margin="616,204,0,0" VerticalAlignment="Top" Height="31" Width="51" FontSize="20    " FontFamily="Sitka Text Semibold" FontWeight="Bold" Foreground="#FF5A1010"/>
+        <Label x:Name="Leader_3_pegs" Content="" HorizontalAlignment="Left" Margin="615,240,0,0" VerticalAlignment="Top" Height="31" Width="51" FontSize="20    " FontFamily="Sitka Text Semibold" FontWeight="Bold" Foreground="#FF5A1010"/>
+        <Label x:Name="Leader_4_pegs" Content="" HorizontalAlignment="Left" Margin="616,276,0,0" VerticalAlignment="Top" Height="31" Width="51" FontSize="20    " FontFamily="Sitka Text Semibold" FontWeight="Bold" Foreground="#FF5A1010"/>
+        <Label x:Name="Leader_5_pegs" Content="" HorizontalAlignment="Left" Margin="616,312,0,0" VerticalAlignment="Top" Height="31" Width="51" FontSize="20    " FontFamily="Sitka Text Semibold" FontWeight="Bold" Foreground="#FF5A1010"/>
+        <Label x:Name="Leader_1_time" Content="" HorizontalAlignment="Left" Margin="691,168,0,0" VerticalAlignment="Top" Height="31" Width="84" FontSize="20    " FontFamily="Sitka Text Semibold" FontWeight="Bold" Foreground="#FF5A1010"/>
+        <Label x:Name="Leader_2_time" Content="" HorizontalAlignment="Left" Margin="693,204,0,0" VerticalAlignment="Top" Height="31" Width="84" FontSize="20    " FontFamily="Sitka Text Semibold" FontWeight="Bold" Foreground="#FF5A1010"/>
+        <Label x:Name="Leader_3_time" Content="" HorizontalAlignment="Left" Margin="691,240,0,0" VerticalAlignment="Top" Height="31" Width="84" FontSize="20    " FontFamily="Sitka Text Semibold" FontWeight="Bold" Foreground="#FF5A1010"/>
+        <Label x:Name="Leader_4_time" Content="" HorizontalAlignment="Left" Margin="693,276,0,0" VerticalAlignment="Top" Height="31" Width="84" FontSize="20    " FontFamily="Sitka Text Semibold" FontWeight="Bold" Foreground="#FF5A1010"/>
+        <Label x:Name="Leader_5_time" Content="" HorizontalAlignment="Left" Margin="693,312,0,0" VerticalAlignment="Top" Height="31" Width="84" FontSize="20    " FontFamily="Sitka Text Semibold" FontWeight="Bold" Foreground="#FF5A1010"/>
+
 
     </Grid>
 </Window>

@@ -7,6 +7,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,9 +37,9 @@ namespace PegTest
 
             ConButton button = new ConButton();
 
-            button.Operation(this, 84, 32, 0, -125, MainGrid, EnumButton.PLAY);
-            button.Operation(this, 84, 32, 0, -25, MainGrid, EnumButton.HELP);
-            button.Operation(this, 84, 32, 0, 75, MainGrid, EnumButton.QUIT);
+            button.Operation(this, 84, 32, -130, -50, MainGrid, EnumButton.PLAY);
+            button.Operation(this, 84, 32, -130, 50, MainGrid, EnumButton.HELP);
+            button.Operation(this, 84, 32, -130, 150, MainGrid, EnumButton.QUIT);
 
             TextBlock t = new TextBlock()
             {
@@ -54,6 +55,42 @@ namespace PegTest
 
             MainGrid.Children.Add(t);
             MainGrid.UpdateLayout();
+        }
+
+        private struct leaderPerson
+        {
+            public leaderPerson(string name, string pegsRemaining, string time)
+            {
+                Name = name;
+                PegsRemaining = pegsRemaining;
+                Time = time;
+            }
+            public string Name { get; }
+            public string PegsRemaining { get; }
+            public string Time { get; }
+        }
+        private void UpdateLeaderBoard()
+        {
+
+
+        }
+
+        private void ReadLeadersFile()
+        {
+            try
+            {
+                // Open the text file using a stream reader.
+                using (var sr = new StreamReader("leaders.txt"))
+                {
+                    // Read the stream as a string, and write the string to the console.
+                    Console.WriteLine(sr.ReadToEnd());
+                }
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine("The file could not be read:");
+                Console.WriteLine(e.Message);
+            }
         }
 
 
