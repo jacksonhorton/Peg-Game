@@ -161,7 +161,8 @@ namespace PegTest
                     saveWindow.ShowDialog();  // waits for save fialog to close before moving on
 
                     // call for window to add score to leaders file
-                    ((GameOverWindow)w).appendScoreToLeaderboard(saveWindow.name_Text_box.Text);
+                    String name_field = saveWindow.name_Text_box.Text;
+                    ((GameOverWindow)w).appendScoreToLeaderboard(name_field.Replace('%', ' '));
                     break;
 
                 default:

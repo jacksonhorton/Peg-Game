@@ -65,6 +65,9 @@ namespace PegTest
             MainGrid.UpdateLayout();
         }
 
+        /**
+         * Struct that stores a pervious game's stats for the leaderboard.
+         */
         private struct leaderPerson
         {
             public leaderPerson(string name, int pegsRemaining, int time, string formatTime)
@@ -138,11 +141,12 @@ namespace PegTest
 
                     }
                 }
-
+                // add whatever is left to the end of the dictionary
                 leaderboard.Add(leaderboard.Count+1, temp);
 
             }
 
+            // update leaderboard scores with top 5 scores in dict if present
             if (leaderboard.ContainsKey(1))
             {
                 Leader_1_name.Content = leaderboard[1].Name;
@@ -195,7 +199,7 @@ namespace PegTest
                     lines = sr.ReadToEnd().Split('\n');
                 }
             }
-            catch (IOException e)
+            catch (Exception e)
             {
                 Console.WriteLine("The file could not be read:");
                 Console.WriteLine(e.Message);

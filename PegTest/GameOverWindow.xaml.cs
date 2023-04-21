@@ -85,7 +85,10 @@ namespace PegTest
             sw.WriteLine($"{name}%%{PegsLeft}%%{timeInSeconds}%%{formattedTimeString}");
             sw.Close();
 
-            // disable save button
+            // Goes to menu
+            MainWindow menu = new MainWindow();
+            menu.Show();
+            this.Close();
         }
     }
 }
