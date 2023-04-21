@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +27,17 @@ namespace PegGame
 
         private void okButton_Click(object sender, RoutedEventArgs e)
         {
-            // https://stackoverflow.com/questions/10946421/append-data-to-existing-file-in-c-sharp
+            this.Close();
+        }
+
+        public void Window_Closing(object sender, CancelEventArgs e)
+        {
+            //probably nothing
+        }
+
+        public void appendScoreToFile()
+        {
+
         }
     }
 }

@@ -23,6 +23,8 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Automation.Peers;
+using Microsoft.Win32;
+using PegGame;
 
 namespace PegTest
 {
@@ -155,7 +157,11 @@ namespace PegTest
 
                 case EnumButton.SAVE:
                     // prompts user for name to save to leaderboard
+                    SaveGameBox saveWindow = new SaveGameBox();
+                    saveWindow.ShowDialog();
 
+                    // call for window to add score to leaders file
+                    ((GameOverWindow)w).appendScoreToLeaderboard(saveWindow.name_Text_box.Text);
                     break;
 
                 default:
