@@ -79,6 +79,13 @@ namespace PegTest
             public int Time { get; set; }
             public string FormatTime { get; set; }
         }
+
+        /**
+         * Loads the leaderboard file, parses each entry/line and updates leaderboard on
+         * main menu with ordered game stats.
+         * 
+         * @return  void
+         */
         private void UpdateLeaderBoard()
         {
             // get lines from file
@@ -89,6 +96,7 @@ namespace PegTest
             {
                 string[] tokens = line.Split("%%");
 
+                // creates leaderPerson struct from this line's parsed data
                 leaderPerson aLeader;
                 if (tokens.Length == 4)
                 {
@@ -105,28 +113,74 @@ namespace PegTest
                 leaderPerson temp = aLeader;
                 foreach (KeyValuePair<int, leaderPerson> entry in leaderboard)
                 {
-                    // if temp has higher pegs left than current entry, move to next entry
-                    if (temp.PegsRemaining > entry.Value.PegsRemaining)
-                        continue;
+                    // if temp has fewer or equal pegs than the current entry, it may go here: check for time taken...
+                    if (temp.PegsRemaining < entry.Value.PegsRemaining)
+                    {
+                        //swap is going in the current entry's place, entry becomes temp and continues iterating through the dict(leaderboard)
+                        leaderPerson swap = temp;
+                        temp = entry.Value;
 
-                    // if temp has equal pegs left.....
-                    if (temp.PegsRemaining == entry.Value.PegsRemaining)
+                        leaderboard[entry.Key] = swap;
+                    
+                    }
+                    // if temp has equal pegs, check if time is lower
+                    else if (temp.PegsRemaining == entry.Value.PegsRemaining)
                     {
                         // check if temp has lower time, if so temp should take this entrys place
                         if (temp.Time < entry.Value.Time)
                         {
-                            leaderPerson swap = entry.Value;
-                            entry.Value = temp;
-                            temp = swap;
+                            //swap is going in the current entry's place, entry becomes temp and continues iterating through the dict(leaderboard)
+                            leaderPerson swap = temp;
+                            temp = entry.Value;
+
+                            leaderboard[entry.Key] = swap;
                         }
 
                     }
                 }
 
+                leaderboard.Add(leaderboard.Count+1, temp);
+
+            }
+
+            if (leaderboard.ContainsKey(1))
+            {
+                Leader_1_name.Content = leaderboard[1].Name;
+                Leader_1_pegs.Content = leaderboard[1].PegsRemaining;
+                Leader_1_time.Content = leaderboard[1].FormatTime;
+            }
+            if (leaderboard.ContainsKey(2))
+            {
+                Leader_2_name.Content = leaderboard[2].Name;
+                Leader_2_pegs.Content = leaderboard[2].PegsRemaining;
+                Leader_2_time.Content = leaderboard[2].FormatTime;
+            }
+            if (leaderboard.ContainsKey(3))
+            {
+                Leader_3_name.Content = leaderboard[3].Name;
+                Leader_3_pegs.Content = leaderboard[3].PegsRemaining;
+                Leader_3_time.Content = leaderboard[3].FormatTime;
+            }
+            if (leaderboard.ContainsKey(4))
+            {
+                Leader_4_name.Content = leaderboard[4].Name;
+                Leader_4_pegs.Content = leaderboard[4].PegsRemaining;
+                Leader_4_time.Content = leaderboard[4].FormatTime;
+            }
+            if (leaderboard.ContainsKey(5))
+            {
+                Leader_5_name.Content = leaderboard[5].Name;
+                Leader_5_pegs.Content = leaderboard[5].PegsRemaining;
+                Leader_5_time.Content = leaderboard[5].FormatTime;
             }
 
         }
 
+        /**
+         * Reads the lines from the leaders file and returns an array of strings of each line in the file
+         * 
+         * @return  string[]    array of (strings) lines containing game stats
+         */
         private string[] ReadLeadersFile()
         {
             // creates array to store lines of file
@@ -138,7 +192,7 @@ namespace PegTest
                 using (var sr = new StreamReader("..\\leaders.txt"))
                 {
                     // add each line from file to the string array
-                    lines = sr.ReadToEnd().Split("%%");
+                    lines = sr.ReadToEnd().Split('\n');
                 }
             }
             catch (IOException e)

@@ -77,7 +77,7 @@ namespace PegTest
         public void appendScoreToLeaderboard(string name)
         {
             // open file stream to leaders file
-            StreamWriter sw = new StreamWriter("..\\leaders.txt");
+            StreamWriter sw = new StreamWriter("..\\leaders.txt", true);
 
 
             // '%%' is used as a delimiter to separate data in the leaders file
