@@ -158,7 +158,7 @@ namespace PegTest
                 case EnumButton.SAVE:
                     // prompts user for name to save to leaderboard
                     SaveGameBox saveWindow = new SaveGameBox();
-                    saveWindow.ShowDialog();
+                    saveWindow.ShowDialog();  // waits for save fialog to close before moving on
 
                     // call for window to add score to leaders file
                     ((GameOverWindow)w).appendScoreToLeaderboard(saveWindow.name_Text_box.Text);

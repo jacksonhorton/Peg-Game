@@ -30,7 +30,6 @@ namespace PegTest
         private int PegsLeft;
         private int timeInSeconds;
         private string formattedTimeString;
-        Button
 
         public GameOverWindow(int PegsLeft, int timeInSeconds)
         {
