@@ -25,6 +25,7 @@ namespace PegTest
     {
         private Board board;
         private int startPos;
+        public int timeInSeconds { get; set; }
         private System.Windows.Forms.Timer timer;
 
 
@@ -44,6 +45,8 @@ namespace PegTest
             // creates new board and passes this window so it can control pegs
             board = new Board(5, 15, 14, this);
             startPos = -1;
+            timeInSeconds = 0;
+
             // creates timer for board
             TimerText.Text = "0:00";
             timer = new System.Windows.Forms.Timer();
@@ -69,35 +72,15 @@ namespace PegTest
          */
         public void TimerTick(object? sender, EventArgs e)
         {
-            // not terribly efficient :)
-            String[] timerTokens;
-            int min, sec;
-            timerTokens = TimerText.Text.Split(':');
+            // increment time
+            timeInSeconds += 1;
 
-            if (timerTokens.Length >= 2 )
-            {
-                //get int values of minute and second from timer text
-                min = Convert.ToInt32(timerTokens[0]);
-                sec = Convert.ToInt32(timerTokens[1]);
+            // calculate seconds and minutes
+            int min = timeInSeconds / 60;
+            int sec = timeInSeconds % 60;
 
-                // increament timer, check for seconds hitting minute mark
-                if (sec < 59)
-                {
-                    sec += 1;
-                }
-                else
-                {
-                    min += 1;
-                    sec = 0;
-                }
-
-                // Update timertext with formatting
-                TimerText.Text = $"{min}:{sec:D2}";
-            }
-            else
-            {
-                TimerText.Text = "0:00";
-            }
+            // Update timertext with formatting
+            TimerText.Text = $"{min}:{sec:D2}";
         }
 
         /**

@@ -327,7 +327,7 @@ namespace PegTest
             await Task.Delay(500);
 
             //game over window load
-            GameOverWindow gameover = new GameOverWindow(numOfPegs, window.TimerText.Text);
+            GameOverWindow gameover = new GameOverWindow(numOfPegs, window.timeInSeconds);
             gameover.Show();
 
             // close game window

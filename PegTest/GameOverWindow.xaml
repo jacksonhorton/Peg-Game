@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PegTest"
         mc:Ignorable="d"
-        Title="GameOverWindow" Height="485" Width="622" ResizeMode="NoResize">
+        Title="Game Over" Height="485" Width="622" ResizeMode="NoResize">
     <Window.Background>
         <ImageBrush ImageSource="/blank-screen.png" Stretch="UniformToFill" TileMode="None">
             <ImageBrush.RelativeTransform>

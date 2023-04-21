@@ -9,6 +9,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,24 +21,39 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace PegTest
 {
     public partial class GameOverWindow : Window
     {
-        public GameOverWindow(int PegsLeft, string time)
+        private int PegsLeft;
+        private int timeInSeconds;
+        private string formattedTimeString;
+
+        public GameOverWindow(int PegsLeft, int timeInSeconds)
         {
+            this.PegsLeft = PegsLeft;
+            this.timeInSeconds = timeInSeconds;
+
             InitializeComponent();
 
-            TimerText.Text = "Time taken: " + time;
+            ///Formats time string
+            // calculate seconds and minutes
+            int min = timeInSeconds / 60;
+            int sec = timeInSeconds % 60;
+
+            // Update timertext with formatting
+            this.formattedTimeString = $"{min}:{sec:D2}";
+
+            TimerText.Text = "Time taken: " + formattedTimeString;
             PegsLeftText.Text = "Number of pegs left: " + PegsLeft;
             InsultText.Text = GetInsult(PegsLeft);
 
             ConButton Btn = new ConButton();
-
             Btn.Operation(this, 84, 32, 0, 200, GameOverGrid, EnumButton.MENU);
             Btn.Operation(this, 84, 32, 0, 290, GameOverGrid, EnumButton.RESET);
-            Btn.Operation(this, 84, 32, 0, 380, GameOverGrid, EnumButton.QUIT);
+            Btn.Operation(this, 84, 32, 0, 380, GameOverGrid, EnumButton.SAVE);
 
         }
 
@@ -54,7 +70,23 @@ namespace PegTest
                 default:
                     return "You are made of stupid and bring shame on your family name";
             }
+        }
 
+        public void appendScoreToLeaderboard(string name)
+        {
+            // open file stream to leaders file
+            StreamWriter sw = new StreamWriter("..\\leaders.txt", true);
+
+
+            // '%%' is used as a delimiter to separate data in the leaders file
+            // should be stored as 'name%%pegs_left%%time_in_seconds'
+            sw.WriteLine($"{name}%%{PegsLeft}%%{timeInSeconds}%%{formattedTimeString}");
+            sw.Close();
+
+            // Goes to menu
+            MainWindow menu = new MainWindow();
+            menu.Show();
+            this.Close();
         }
     }
 }

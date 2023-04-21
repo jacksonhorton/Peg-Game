@@ -23,6 +23,8 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Automation.Peers;
+using Microsoft.Win32;
+using PegGame;
 
 namespace PegTest
 {
@@ -133,8 +135,8 @@ namespace PegTest
                     break;
 
                 case EnumButton.UNDO:
-                    //scawwwyyyy
-                    Board b =((BoardWindow)w).GetBoard();
+                    // Gets board object, undoes last move, clears move elipses
+                    Board b =((BoardWindow)w).GetBoard(); //scawwwyyyy
                     b.RemoveMoveEllipses();
                     b.undoMove();
                     break;
@@ -151,6 +153,16 @@ namespace PegTest
                     // timer is restarted by PauseWindow
                     ((PauseWindow)w).RenderPausedWindow();
                     w.Close();
+                    break;
+
+                case EnumButton.SAVE:
+                    // prompts user for name to save to leaderboard
+                    SaveGameBox saveWindow = new SaveGameBox();
+                    saveWindow.ShowDialog();  // waits for save fialog to close before moving on
+
+                    // call for window to add score to leaders file
+                    String name_field = saveWindow.name_Text_box.Text;
+                    ((GameOverWindow)w).appendScoreToLeaderboard(name_field.Replace('%', ' '));
                     break;
 
                 default:

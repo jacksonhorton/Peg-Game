@@ -15,6 +15,7 @@ Open the solution file in Visual Studio 2022 and build the solution. The game wi
 * A multiscreen interface for interacting with the game that feels cohesive. The information and style displayed is consistent across the entire game application.
 * A move highlighter. When a peg is clicked, any possible moves are highlighted to help the player visualize their possible moves.
 * The game over screen displays the score and a quip based on the value of their score. It really encourages the player to do better.
+* A leaderboard on the main menu screen that shows the top 5 saved games. To be on the leaderboard, a player has to use the "Save" button after their game.
 
 # Timeline
 We had many goals and design choices when we entered this project outlined in our proposal. Here is a reflection on what we have implemented so far and what is still possibly to come:
@@ -22,7 +23,7 @@ We had many goals and design choices when we entered this project outlined in ou
 - [x] Rule enforcement (jumping and moving)
 - [x] Pause button
 - [x] Timer
-- [ ] Leaderboard
+- [x] Leaderboard
 - [x] Undo button
 - [ ] Multiple boards
 - [x] Menu Screen
